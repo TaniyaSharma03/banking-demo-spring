@@ -1,8 +1,11 @@
 package org.example.repository;
 import org.example.model.Customer;
-import java.util.List;
-public interface CustomerRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
 
-    public List<Customer> findAll();
+import java.util.List;
+
+public interface CustomerRepository extends JpaRepository<Customer, Long>{
 
 }
+
+
