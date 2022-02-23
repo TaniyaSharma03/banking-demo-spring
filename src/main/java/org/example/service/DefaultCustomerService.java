@@ -1,12 +1,14 @@
 package org.example.service;
 import org.example.model.Customer;
 import org.example.repository.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
-//@Service("customerService")
+@Service("customerService")
 public class DefaultCustomerService implements CustomerService {
-
-    //private CustomerRepositoryDB repository = new CustomerRepositoryDB();
+    @Autowired
 private CustomerRepository repository;
 public DefaultCustomerService(){}
     //using setter
