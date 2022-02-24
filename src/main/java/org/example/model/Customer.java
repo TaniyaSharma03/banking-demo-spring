@@ -1,6 +1,7 @@
 package org.example.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity(name = "customers")
 public class Customer {
@@ -11,10 +12,10 @@ public class Customer {
     private Long id;
     private String name;
     private String city;
+private Date date_of_birth;
 
-private String date_of_birth;
-private String zipcode;
-private String status;
+    private String zipcode;
+    private String status;
     public Customer(){}
 
 //    public Customer(String id, String name, String city) {
@@ -27,9 +28,10 @@ private String status;
         return id;
     }
 
-    public String getDate_of_birth() {
+    public Date getDate_of_birth() {
         return date_of_birth;
     }
+
 
     public String getZipcode() {
         return zipcode;
@@ -53,7 +55,7 @@ private String status;
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", city='" + city + '\'' +
-                ", date_of_birth='" + date_of_birth + '\'' +
+                ", date_of_birth=" + date_of_birth +
                 ", zipcode='" + zipcode + '\'' +
                 ", status='" + status + '\'' +
                 '}';
