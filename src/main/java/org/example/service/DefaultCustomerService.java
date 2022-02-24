@@ -31,8 +31,12 @@ public DefaultCustomerService(){}
     @Override
     public Customer getCustomer(Long id) {
         Optional <Customer> optionalCustomer = repository.findById(id);
-        return optionalCustomer.get();
+        return optionalCustomer.orElseGet(Customer::new);
     }
 
+@Override
+    public void deleteCustomer(Long id){
+repository.deleteById(id);
 
+    }
 }
