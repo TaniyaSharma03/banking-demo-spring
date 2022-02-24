@@ -11,6 +11,10 @@ public class Customer {
     private Long id;
     private String name;
     private String city;
+
+private String date_of_birth;
+private String zipcode;
+private String status;
     public Customer(){}
 
 //    public Customer(String id, String name, String city) {
@@ -21,6 +25,18 @@ public class Customer {
 
     public Long getId() {
         return id;
+    }
+
+    public String getDate_of_birth() {
+        return date_of_birth;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     public String getName() {
@@ -34,9 +50,12 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", city='" + city + '\'' +
+                ", date_of_birth='" + date_of_birth + '\'' +
+                ", zipcode='" + zipcode + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }
