@@ -14,22 +14,32 @@ public class CustomersController {
 
     @Autowired
     private CustomerService customerService;
+
     @GetMapping
-    public List<Customer> getAllCustomers(){
-    return customerService.getAllCustomers();
-}
+    public List<Customer> getAllCustomers() {
+        return customerService.getAllCustomers();
+    }
 
     @RequestMapping("{id}")
-    public ResponseEntity<Customer> getCustomer(@PathVariable Long id){
-    return customerService.getCustomer(id);
-}
-
-@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-    public void deleteCustomer(@PathVariable Long id){
-    customerService.deleteCustomer(id);
+    public ResponseEntity<Customer> getCustomer(@PathVariable Long id) {
+        System.out.println("GET");
+        return customerService.getCustomer(id);
     }
-@PostMapping
-    public Customer saveCustomer(@RequestBody Customer customer){
+
+    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    public void deleteCustomer(@PathVariable Long id) {
+        customerService.deleteCustomer(id);
+    }
+
+    @PostMapping
+    public Customer saveCustomer(@RequestBody Customer customer) {
         return customerService.saveCustomer(customer);
-}
+    }
+
+    @RequestMapping(value = "{id}", method = RequestMethod.PUT)
+    public Customer updateCustomer(@PathVariable Long id,
+                                   @RequestBody Customer customer) {
+        System.out.println("PUT");
+        return customerService.updateCustomer(id, customer);
+    }
 }

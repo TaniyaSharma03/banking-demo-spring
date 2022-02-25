@@ -1,6 +1,7 @@
 package org.example.service;
 import org.example.model.Customer;
 import org.example.repository.CustomerRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,19 +42,6 @@ public DefaultCustomerService(){}
         throw new ResponseStatusException(HttpStatus.NOT_FOUND,"customer not found");
     }
 
-//@Override
-//    public void deleteCustomer(Long id){
-//        Optional <Customer> optionalCustomer = repository.findById(id);
-//        if(optionalCustomer.isPresent()){
-//        repository.deleteById(id);
-//        throw new ResponseStatusException(HttpStatus.OK, "customer Is deleted");
-//        }
-//    else {
-//        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "customer not found");
-//    }
-//    }
-//}
-
     @Override
     public void deleteCustomer(Long id){
         ResponseEntity<Customer> customer= getCustomer(id);
@@ -66,5 +54,15 @@ public DefaultCustomerService(){}
     @Override
     public Customer saveCustomer(Customer customer) {
         return repository.saveAndFlush(customer);
+    }
+    @Override
+    public Customer updateCustomer(Long id, Customer customer) {
+        ResponseEntity<Customer> responseEntity = getCustomer(id);
+        if(responseEntity.getStatusCode().is4xxClientError()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "invalid customer id");
+        }
+        Customer existingCustomer = responseEntity.getBody();
+        BeanUtils.copyProperties(customer, existingCustomer, "id");
+        return repository.saveAndFlush(existingCustomer);
     }
 }
