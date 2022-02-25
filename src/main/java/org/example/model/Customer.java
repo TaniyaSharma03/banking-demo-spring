@@ -12,41 +12,55 @@ public class Customer {
     private Long id;
     private String name;
     private String city;
-private Date date_of_birth;
-
+    private Date date_of_birth;
     private String zipcode;
-    private String status;
+    private Integer status;
     public Customer(){}
-
-//    public Customer(String id, String name, String city) {
-//        this.id = id;
-//        this.name = name;
-//        this.city = city;
-//    }
-
     public Long getId() {
+
         return id;
     }
 
-    public Date getDate_of_birth() {
-        return date_of_birth;
+    public void setId(Long id) {
+        this.id = id;
     }
-
-
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getCity() {
         return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public Date getDate_of_birth() {
+
+        return date_of_birth;
+    }
+
+    public void setDate_of_birth(Date date_of_birth) {
+        this.date_of_birth = date_of_birth;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     @Override
