@@ -2,7 +2,10 @@ package org.example.service;
 import org.example.model.Customer;
 import org.example.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,14 +32,24 @@ public DefaultCustomerService(){}
     }
 
     @Override
-    public Customer getCustomer(Long id) {
+    public ResponseEntity<Customer> getCustomer(Long id) {
         Optional <Customer> optionalCustomer = repository.findById(id);
-        return optionalCustomer.orElseGet(Customer::new);
+        if(optionalCustomer.isPresent()){
+            return new ResponseEntity<>(optionalCustomer.get(), HttpStatus.OK);
+        }
+        //return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND,"customer not found");
     }
 
 @Override
     public void deleteCustomer(Long id){
-repository.deleteById(id);
-
+        Optional <Customer> optionalCustomer = repository.findById(id);
+    if(optionalCustomer.isPresent()){
+        repository.deleteById(id);
+        throw new ResponseStatusException(HttpStatus.OK, "customer Is deleted");
+    }
+    else {
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "customer not found");
+    }
     }
 }
