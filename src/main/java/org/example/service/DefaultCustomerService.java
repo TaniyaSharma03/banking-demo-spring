@@ -41,15 +41,30 @@ public DefaultCustomerService(){}
         throw new ResponseStatusException(HttpStatus.NOT_FOUND,"customer not found");
     }
 
-@Override
+//@Override
+//    public void deleteCustomer(Long id){
+//        Optional <Customer> optionalCustomer = repository.findById(id);
+//        if(optionalCustomer.isPresent()){
+//        repository.deleteById(id);
+//        throw new ResponseStatusException(HttpStatus.OK, "customer Is deleted");
+//        }
+//    else {
+//        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "customer not found");
+//    }
+//    }
+//}
+
+    @Override
     public void deleteCustomer(Long id){
-        Optional <Customer> optionalCustomer = repository.findById(id);
-    if(optionalCustomer.isPresent()){
+        ResponseEntity<Customer> customer= getCustomer(id);
+        if(customer.getStatusCode().is4xxClientError()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "customer not found");
+        }
         repository.deleteById(id);
-        throw new ResponseStatusException(HttpStatus.OK, "customer Is deleted");
     }
-    else {
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "customer not found");
-    }
+
+    @Override
+    public Customer saveCustomer(Customer customer) {
+        return repository.saveAndFlush(customer);
     }
 }
